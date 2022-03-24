@@ -31,12 +31,20 @@ public class SetGroupedCheckboxHelper
             // Create a PDF document for filling form fields.
             using var pdfDocToFill = new PdfLoadedDocument(file: pdfTemplateStream);
 
-            if (pdfDocToFill.Form.Fields.TryGetField("firearmApp", out PdfLoadedField field))
+            // Grouped checkbox
+            if (pdfDocToFill.Form.Fields.TryGetField("firearmApp", out PdfLoadedField groupedField))
             {
                 // We know this field is a grouped checkbox. Set the first child checkbox.
-                var checkBoxField = (PdfLoadedCheckBoxField)field;
-
+                var checkBoxField = (PdfLoadedCheckBoxField)groupedField;
                 checkBoxField.Items[1].Checked = true;
+            }
+
+            // Non-grouped checkbox
+            if (pdfDocToFill.Form.Fields.TryGetField("RaceAsian", out PdfLoadedField nonGroupedField))
+            {
+                // We know this field is NOT a grouped checkbox. Set the checkbox itself.
+                var checkBoxField = (PdfLoadedCheckBoxField)nonGroupedField;
+                checkBoxField.Checked = true;
             }
 
 
