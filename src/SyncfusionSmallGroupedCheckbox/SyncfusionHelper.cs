@@ -1,13 +1,13 @@
-﻿using System.Diagnostics;
-using Syncfusion.Pdf.Parsing;
+﻿using Syncfusion.Pdf.Parsing;
 
 namespace SyncfusionSmallGroupedCheckbox;
 
-public class SetGroupedCheckboxHelper
+public class SyncfusionHelper
 {
-    public static void SetGroupedCheckbox(string pdfTemplateFilePath)
+    public static void SetGroupedCheckbox(string pdfTemplateFilePath, string outputFolder)
     {
         ArgumentNullException.ThrowIfNull(pdfTemplateFilePath);
+        ArgumentNullException.ThrowIfNull(outputFolder);
 
         if (!File.Exists(pdfTemplateFilePath))
         {
@@ -36,7 +36,7 @@ public class SetGroupedCheckboxHelper
             {
                 // We know this field is a grouped checkbox. Set the first child checkbox.
                 var checkBoxField = (PdfLoadedCheckBoxField)groupedField;
-                checkBoxField.Items[1].Checked = true;
+                checkBoxField.Items[0].Checked = true;
             }
 
             // Non-grouped checkbox
@@ -49,10 +49,10 @@ public class SetGroupedCheckboxHelper
 
 
             //
-            // Save the file to disk. Write the filled PDF to the same directory as the template file.
+            // Save the file to disk. Write to the specified output directory.
             //
 
-            var outputFilePath = GetOutputFilePath(pdfTemplateFilePath);
+            var outputFilePath = FileHelper.GetOutputFilePath(pdfTemplateFilePath, "syncfusion", outputFolder);
             SaveFile(pdfDocToFill, outputFilePath);
 
 
@@ -60,21 +60,8 @@ public class SetGroupedCheckboxHelper
             // Launch the PDF in a new Chrome browser tab.
             //
 
-            using Process process = new();
-            process.StartInfo.UseShellExecute = true;
-            process.StartInfo.FileName = "chrome";
-            process.StartInfo.Arguments = outputFilePath;
-            process.Start();
+            ChromeHelper.OpenPdfInBrowser(outputFilePath);
         }
-    }
-
-    private static string GetOutputFilePath(string inputFilePath)
-    {
-        var fileNameNoExtension = Path.GetFileNameWithoutExtension(inputFilePath);
-        var extension = Path.GetExtension(inputFilePath);
-        var templateFileDir = Path.GetDirectoryName(inputFilePath)!;
-
-        return Path.Combine(templateFileDir, $"{fileNameNoExtension}_filled{extension}");
     }
 
     private static void SaveFile(PdfLoadedDocument pdfDocument, string outputFilePath)
