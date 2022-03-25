@@ -6,7 +6,7 @@ I have a certain government PDF form I have to fill out electronically. When I f
 
 ![iTextSharp checbox sizes](sample_rendered_pdfs/race_itextsharp.png)
 
-However, when I fill the same PDF with `Syncfusion.Pdf`, the checks are rendered with a much smaller size:
+However, when I fill the same PDF with `Syncfusion.Pdf`, the checks in the [resulting PDF](sample_rendered_pdfs/application_syncfusion_filled.pdf) are rendered with a much smaller size:
 
 ![iTextSharp checbox sizes](sample_rendered_pdfs/race_syncfusion.png)
 
