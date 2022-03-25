@@ -1,4 +1,8 @@
-# Using Syncfusion PDF to check a checkbox results in a tiny rendered check
+# Using Syncfusion PDF to check a checkbox results in a tiny rendered check in Chromium-based browsers
+
+> NOTE: this rendering issue only appears to happen in Chromium-based browsers (i.e., Chrome, Edge). The checks render correctly in Firefox, Safari, Preview, and Acrobat.
+
+> To view the incorrect rendering, be sure to download the PDFs and open them in Chrome or Edge. GitHub's built-in PDF renderer renders the checks at the correct size.
 
 I'm replacing the old `iTextSharp` library in our application with `Syncfusion.Pdf`. 
 
@@ -12,7 +16,7 @@ However, when I fill the same PDF with `Syncfusion.Pdf`, the checks in the [resu
 
 This government agency has rejected forms in the past as unreadable when they differ too much from the manually filled forms, and I fear that they may do the same here.
 
-**Is there a workaround to prevent `Syncfusion.Pdf` from rendering the checks in a smaller size?**
+**Is there a workaround to prevent `Syncfusion.Pdf`'s filled PDF from rendering the checks in a smaller size in a Chromium browser, the way `iTextSharp` does?**
 
 ## To Reproduce
 
