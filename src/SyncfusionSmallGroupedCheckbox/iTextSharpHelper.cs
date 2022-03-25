@@ -35,8 +35,20 @@ public static class iTextSharpHelper
                     reader = new PdfReader(pdfTemplateStream);
                     stamper = new PdfStamper(reader, outputFileStream);
 
-                    // Set the first checkbox.
+                    // Set checkboxes.
                     stamper.AcroFields.SetField("firearmApp", "SAR");
+                    stamper.AcroFields.SetField("Pawn", "On");
+                    stamper.AcroFields.SetField("ApplicationTime", "a.m.");
+                    stamper.AcroFields.SetField("PrivateTrans", "On");
+                    stamper.AcroFields.SetField("Condition", "New");
+
+                    stamper.AcroFields.SetField("sex", "Male");
+                    stamper.AcroFields.SetField("citizen", "Yes");
+                    stamper.AcroFields.SetField("RaceIndian", "Yes");
+                    stamper.AcroFields.SetField("RaceAsian", "Yes");
+                    stamper.AcroFields.SetField("RaceBlack", "Yes");
+                    stamper.AcroFields.SetField("RaceHawaiian", "Yes");
+                    stamper.AcroFields.SetField("RaceWhite", "Yes");
 
                     stamper.Close();
                     reader.Close();

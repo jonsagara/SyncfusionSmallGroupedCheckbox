@@ -5,7 +5,7 @@
 var outputFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "GroupedCheckboxFilledPdfs");
 
 // This is the relative path to the template PDF that we will fill.
-const string templateFilePath = @"templates\wa_state_firearm_transfer_app.pdf";
+const string templateFilePath = @"templates\application.pdf";
 
 
 //
@@ -17,4 +17,3 @@ SyncfusionHelper.SetGroupedCheckbox(pdfTemplateFilePath: templateFilePath, outpu
 
 // iTextSharp: the first checked box is normal size.
 iTextSharpHelper.SetGroupedCheckbox(pdfTemplateFilePath: templateFilePath, outputFolder: outputFolder);
-

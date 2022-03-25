@@ -31,21 +31,19 @@ public class SyncfusionHelper
             // Create a PDF document for filling form fields.
             using var pdfDocToFill = new PdfLoadedDocument(file: pdfTemplateStream);
 
-            // Grouped checkbox
-            if (pdfDocToFill.Form.Fields.TryGetField("firearmApp", out PdfLoadedField groupedField))
-            {
-                // We know this field is a grouped checkbox. Set the first child checkbox.
-                var checkBoxField = (PdfLoadedCheckBoxField)groupedField;
-                checkBoxField.Items[0].Checked = true;
-            }
+            SetGroupedCheckbox(pdfDocToFill, fieldName: "firearmApp", selectedIndex: 0, isChecked: true);
+            SetCheckbox(pdfDocToFill, fieldName: "Pawn", isChecked: true);
+            SetGroupedCheckbox(pdfDocToFill, fieldName: "ApplicationTime", selectedIndex: 1, isChecked: true);
+            SetCheckbox(pdfDocToFill, fieldName: "PrivateTrans", isChecked: true);
+            SetGroupedCheckbox(pdfDocToFill, fieldName: "Condition", selectedIndex: 0, isChecked: true);
 
-            // Non-grouped checkbox
-            if (pdfDocToFill.Form.Fields.TryGetField("RaceAsian", out PdfLoadedField nonGroupedField))
-            {
-                // We know this field is NOT a grouped checkbox. Set the checkbox itself.
-                var checkBoxField = (PdfLoadedCheckBoxField)nonGroupedField;
-                checkBoxField.Checked = true;
-            }
+            SetGroupedCheckbox(pdfDocToFill, fieldName: "sex", selectedIndex: 0, isChecked: true);
+            SetGroupedCheckbox(pdfDocToFill, fieldName: "citizen", selectedIndex: 0, isChecked: true);
+            SetCheckbox(pdfDocToFill, fieldName: "RaceIndian", isChecked: true);
+            SetCheckbox(pdfDocToFill, fieldName: "RaceAsian", isChecked: true);
+            SetCheckbox(pdfDocToFill, fieldName: "RaceBlack", isChecked: true);
+            SetCheckbox(pdfDocToFill, fieldName: "RaceHawaiian", isChecked: true);
+            SetCheckbox(pdfDocToFill, fieldName: "RaceWhite", isChecked: true);
 
 
             //
@@ -61,6 +59,26 @@ public class SyncfusionHelper
             //
 
             ChromeHelper.OpenPdfInBrowser(outputFilePath);
+        }
+    }
+
+    private static void SetGroupedCheckbox(PdfLoadedDocument pdfDoc, string fieldName, int selectedIndex, bool isChecked)
+    {
+        if (pdfDoc.Form.Fields.TryGetField(fieldName, out PdfLoadedField groupedField))
+        {
+            // We know this field is a grouped checkbox. Set the first child checkbox.
+            var checkBoxField = (PdfLoadedCheckBoxField)groupedField;
+            checkBoxField.Items[selectedIndex].Checked = isChecked;
+        }
+    }
+
+    private static void SetCheckbox(PdfLoadedDocument pdfDoc, string fieldName, bool isChecked)
+    {
+        if (pdfDoc.Form.Fields.TryGetField(fieldName, out PdfLoadedField nonGroupedField))
+        {
+            // We know this field is NOT a grouped checkbox. Set the checkbox itself.
+            var checkBoxField = (PdfLoadedCheckBoxField)nonGroupedField;
+            checkBoxField.Checked = isChecked;
         }
     }
 
