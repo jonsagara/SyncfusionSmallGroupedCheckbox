@@ -2,7 +2,7 @@
 
 	<PropertyGroup>
 		<OutputType>Exe</OutputType>
-		<TargetFramework>net6.0</TargetFramework>
+		<TargetFramework>net7.0</TargetFramework>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
 	</PropertyGroup>
@@ -13,7 +13,7 @@
 
 	<ItemGroup>
 		<PackageReference Include="iTextSharp.LGPLv2.Core" Version="1.7.3" />
-		<PackageReference Include="Syncfusion.Pdf.Net.Core" Version="20.1.0.50" />
+		<PackageReference Include="Syncfusion.Pdf.Net.Core" Version="21.1.41" />
 	</ItemGroup>
 
 </Project>
